@@ -1,71 +1,60 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 TicTacToeGame.py
 
 Author: Jun Y. Ercia
 
 Description:
-    Controls the overall game flow of a console-based
-    Tic Tac Toe game using Object-Oriented Programming.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    Main game controller for a console-based Tic Tac Toe game.
+    Orchestrates board display, player turns, move validation,
+    win/draw checks, and player switching.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 from board import Board
 from player import Player
 
 
 class TicTacToeGame:
-    """
-    Main controller class of the Tic Tac Toe game.
-    """
-
     # ---------------------------------------------------------
-    # Constructor Method
-    # ---------------------------------------------------------
+    # Method: __init__
     # Purpose:
-    #     Initializes the game board and two players.
+    #     Initialize a new Tic Tac Toe game with two players and an empty board.
     #
     # Parameters:
-    #     player1_name (str) – Name of Player 1 (X)
-    #     player2_name (str) – Name of Player 2 (O)
+    #     player1_name (str): Name of Player 1 (assigned symbol "X")
+    #     player2_name (str): Name of Player 2 (assigned symbol "O")
     #
     # Precondition:
-    #     Both player names must be valid non-empty strings.
+    #     player1_name and player2_name are non-empty strings.
     #
     # Postcondition:
-    #     A new game instance is created with an empty board
-    #     and two initialized players.
+    #     Board is created, players are created, and current player index is set to 0.
     #
     # Return Value:
     #     None
     # ---------------------------------------------------------
     def __init__(self, player1_name: str, player2_name: str):
         self.__board = Board()
-        self.__players = [
-            Player(player1_name, "X"),
-            Player(player2_name, "O")
-        ]
+        self.__players = [Player(player1_name, "X"), Player(player2_name, "O")]
         self.__current_player_index = 0
-
 
     # ---------------------------------------------------------
     # Method: start_game
-    # ---------------------------------------------------------
     # Purpose:
-    #     Runs the main game loop until a win or draw occurs.
+    #     Run the main game loop until a player wins or the game ends in a draw.
     #
     # Parameters:
     #     None
     #
     # Precondition:
-    #     Game object must be properly initialized.
+    #     Game object is initialized; board and players exist.
     #
     # Postcondition:
-    #     The game ends when a player wins or the board is full.
+    #     Game ends after win or draw; final board state and result printed.
     #
     # Return Value:
     #     None
     # ---------------------------------------------------------
     def start_game(self) -> None:
-
         while True:
             self.__board.display()
             current_player = self.__players[self.__current_player_index]
@@ -86,49 +75,43 @@ class TicTacToeGame:
 
             self.__switch_player()
 
-
     # ---------------------------------------------------------
     # Method: __get_valid_move
-    # ---------------------------------------------------------
     # Purpose:
-    #     Ensures that the selected slot is available before
-    #     placing a chip.
+    #     Ask the player for a move repeatedly until an available slot is chosen.
     #
     # Parameters:
-    #     player (Player) – The current player object
+    #     player (Player): The current player who will enter a move.
     #
     # Precondition:
-    #     Player object must exist.
+    #     player is a valid Player object; board exists.
     #
     # Postcondition:
-    #     A valid available slot number is returned.
+    #     Returns a valid slot number (1-9) that is currently available on the board.
     #
     # Return Value:
-    #     int – Valid slot number (1–9)
+    #     int: An available slot number from 1 to 9.
     # ---------------------------------------------------------
     def __get_valid_move(self, player: Player) -> int:
         while True:
             slot_no = player.move()
             if self.__board.is_available(slot_no):
                 return slot_no
-            else:
-                print("Invalid move! Slot already taken.")
-
+            print("Invalid move! Slot already taken.")
 
     # ---------------------------------------------------------
     # Method: __switch_player
-    # ---------------------------------------------------------
     # Purpose:
-    #     Switches the active player.
+    #     Toggle the current player index between 0 and 1.
     #
     # Parameters:
     #     None
     #
     # Precondition:
-    #     Current player index must be 0 or 1.
+    #     __current_player_index is either 0 or 1.
     #
     # Postcondition:
-    #     Current player index is toggled.
+    #     __current_player_index is switched to the other player.
     #
     # Return Value:
     #     None
