@@ -1,4 +1,4 @@
-# tictactoe-oop-python
+# TicTacToe Game (Python)
 
 A console-based Tic Tac Toe game implemented in Python using Object-Oriented Programming (OOP) principles, modular architecture, and unit testing.
 
