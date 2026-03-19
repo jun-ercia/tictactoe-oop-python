@@ -74,6 +74,8 @@ python -m unittest test_tictactoe.py
 
 **Jun Y. Ercia**
 
+Faculty, Computer Science / Computer Engineering
+
 ## License
 
 This project is provided for educational purposes. You may modify and reuse with proper credit.
